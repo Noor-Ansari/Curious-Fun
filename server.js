@@ -1,16 +1,19 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
+const { setGlobalMiddlewares, setRouting } = require("./utils/global.utils");
 const CONFIG = require("./config");
 
 const app = express();
 
-// setup global middlewares
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+// setup view engine
+app.set("view engine", "ejs");
 
-// database connection
+// setup global middlewares
+setGlobalMiddlewares(app);
+
+// setup routing
+setRouting(app);
 
 (() => {
   mongoose
